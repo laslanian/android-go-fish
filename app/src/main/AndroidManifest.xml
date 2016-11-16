@@ -18,6 +18,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".Services.SQLite"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Services.Downloader"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Services.CSVReader"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Services.Weather"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Services.JSONReader"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
