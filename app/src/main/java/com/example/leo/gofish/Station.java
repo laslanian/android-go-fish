@@ -58,4 +58,9 @@ public class Station {
     public void setProvince(String province) {
         this.province = province;
     }
+
+    @Override
+    public String toString() {
+        return name + ", " + province;
+    }
 }
