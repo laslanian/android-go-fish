@@ -17,6 +17,7 @@ public class CSVFile {
     public CSVFile(InputStream inputstream) {
         this.inputStream = inputstream;
     }
+
     public List read() {
         List<Station> result = new ArrayList();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
