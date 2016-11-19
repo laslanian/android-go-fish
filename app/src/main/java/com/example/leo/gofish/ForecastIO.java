@@ -15,14 +15,14 @@ public class ForecastIO extends AsyncTask<Location, Void, Weather> {
 
     private static final String TAG = ForecastIO.class.getSimpleName();
     private final String key = "0123456789abcdef9876543210fedcba/";
-    private final String url = "https://api.forecast.io/forecast/";
+    private final String url = "https://api.darksky.net/forecast/";
 
     public AsyncResponse delegate = null;
 
     @Override
     protected Weather doInBackground(Location... params) {
         Location location = params[0];
-        String reqUrl = url + key+location.getLongitude()+","+location.getLatitude();
+        String reqUrl = url + key+location.getLatitude()+","+location.getLongitude();
 
         HTTPHandler http = new HTTPHandler();
 
