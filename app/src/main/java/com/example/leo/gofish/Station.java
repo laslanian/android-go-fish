@@ -10,6 +10,18 @@ public class Station {
     private double latitude;
     private double longitude;
     private String province;
+    private double waterLevel;
+    private double discharge;
+
+    public Station() {
+        this.id = "";
+        this.name = "";
+        this.latitude = 0;
+        this.longitude = 0;
+        this.province = "";
+        this.waterLevel = 0;
+        this.discharge = 0;
+    }
 
     public Station(String id, String name, double latitude, double longitude, String province) {
         this.id = id;
@@ -17,6 +29,8 @@ public class Station {
         this.latitude = latitude;
         this.longitude = longitude;
         this.province = province;
+        this.waterLevel = 0;
+        this.discharge = 0;
     }
 
     public String getId() {
@@ -57,6 +71,22 @@ public class Station {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public double getDischarge() {
+        return discharge;
+    }
+
+    public void setDischarge(double discharge) {
+        this.discharge = discharge;
+    }
+
+    public double getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(double waterLevel) {
+        this.waterLevel = waterLevel;
     }
 
     @Override
