@@ -1,11 +1,10 @@
 package com.example.leo.gofish;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,9 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.MapFragment;
+import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity
@@ -102,6 +99,9 @@ public class MainActivity extends AppCompatActivity
         Fragment fr;
         if(view == findViewById(R.id.btnMap)) {
             fr = new CustomMapFragment();
+        }
+        else if(view == findViewById(R.id.btnWeather)) {
+            fr = new WeatherFragment();
         }
         else {
             fr = new ListFragment();
