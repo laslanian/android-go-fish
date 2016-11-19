@@ -1,10 +1,12 @@
 package com.example.leo.gofish;
 
+import java.io.Serializable;
+
 /**
  * Created by Karlo on 11/15/2016.
  */
 
-public class Station {
+public class Station implements Serializable {
     private String id;
     private String name;
     private double latitude;
