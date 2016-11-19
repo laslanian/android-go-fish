@@ -1,14 +1,12 @@
 package com.example.leo.gofish;
 
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by Karlo on 11/15/2016.
  */
 
-public class Station {
+public class Station implements Serializable {
     private String id;
     private String name;
     private double latitude;

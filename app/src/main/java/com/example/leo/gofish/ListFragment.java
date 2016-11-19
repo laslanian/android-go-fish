@@ -1,5 +1,6 @@
 package com.example.leo.gofish;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,6 +38,9 @@ public class ListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), "position is: " + i, Toast.LENGTH_SHORT).show();
                 new DownloadFile(getActivity()).execute(stations.get(i));
+                DetailFragment frag = new DetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Station", stations.get(i));
             }
         });
         return root;
