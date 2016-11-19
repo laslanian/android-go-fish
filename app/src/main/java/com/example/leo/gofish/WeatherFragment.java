@@ -28,7 +28,9 @@ public class WeatherFragment extends Fragment implements AsyncResponse{
 
         Location loc = createNewLocation(44.041870,-79.502407);
 
+
         ForecastIO forecastIO = new ForecastIO();
+        forecastIO.delegate=this;
         forecastIO.execute(loc);
 
         return view;
