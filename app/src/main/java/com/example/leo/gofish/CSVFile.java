@@ -42,4 +42,28 @@ public class CSVFile {
         }
         return result;
     }
+
+    public Station readStation(Station s) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            String last = "", line;
+            while((line = reader.readLine()) != null) {
+                last = line;
+            }
+            String [] data = last.split(",");
+            s.setWaterLevel(Double.parseDouble(data[2]));
+            s.setDischarge(Double.parseDouble(data[6]));
+        } catch (IOException e){
+            throw new RuntimeException("Error in reading CSV file: "+ e);
+        }
+        finally {
+            try {
+                inputStream.close();
+            }
+            catch (IOException e) {
+                throw new RuntimeException("Error while closing input stream: "+e);
+            }
+        }
+        return s;
+    }
 }

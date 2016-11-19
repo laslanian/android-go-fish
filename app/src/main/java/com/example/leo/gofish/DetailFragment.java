@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,13 @@ import java.util.List;
  */
 
 public class DetailFragment extends Fragment {
-    List<Station> stations = new ArrayList<Station>();
+    private Station station;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        station  = (Station) bundle.getSerializable("Station");
     }
 
     @Override
@@ -32,14 +36,10 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_fragment, container, false);
-        init();
-
         return view;
     }
 
     public void init() {
-        InputStream inputstream = getResources().openRawResource(R.raw.stations);
-        CSVFile csv = new CSVFile(inputstream);
-        stations = csv.read();
+
     }
 }

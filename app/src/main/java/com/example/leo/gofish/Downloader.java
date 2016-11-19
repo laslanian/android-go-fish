@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
  * Created by Karlo on 11/15/2016.
  */
 
-class DownloadFile extends AsyncTask<Object, Void, Void> {
+class DownloadFile extends AsyncTask<Object, Void, Object> {
     private Context mContext;
     private final String DL_TAG = "Downloader";
 
@@ -35,7 +35,7 @@ class DownloadFile extends AsyncTask<Object, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Object... objects) {
+    protected Station doInBackground(Object... objects) {
         Station s = (Station) objects[0];
         try {
             File dir = new File(mContext.getFilesDir() + "/stations/hourly");
@@ -62,7 +62,7 @@ class DownloadFile extends AsyncTask<Object, Void, Void> {
             String fileName =  timestamp + "_" +
                     s.getProvince() + "_" +
                     s.getId() + "_hourly_hydrometric.csv"; // filename to be saved
-
+            s.setFileName(fileName);
             File file = new File(dir, fileName);
             if(!file.exists() && !file.isFile()) {
 
@@ -88,12 +88,12 @@ class DownloadFile extends AsyncTask<Object, Void, Void> {
         catch (IOException e) {
             Log.i(DL_TAG, "File not found: " + e.toString());
         }
-        return null;
+        return s;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
         Log.i(DL_TAG, "Download successful!");
     }
 }

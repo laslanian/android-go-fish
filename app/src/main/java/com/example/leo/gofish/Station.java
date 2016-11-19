@@ -15,6 +15,8 @@ public class Station implements Serializable {
     private double waterLevel;
     private double discharge;
 
+    private String fileName;
+
     public Station() {
         this.id = "";
         this.name = "";
@@ -89,6 +91,14 @@ public class Station implements Serializable {
 
     public void setWaterLevel(double waterLevel) {
         this.waterLevel = waterLevel;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
