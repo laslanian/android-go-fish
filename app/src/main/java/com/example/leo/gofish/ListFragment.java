@@ -36,6 +36,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), "position is: " + i, Toast.LENGTH_SHORT).show();
+                new DownloadFile(getActivity()).execute(stations.get(i));
             }
         });
         return root;

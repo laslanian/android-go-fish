@@ -1,5 +1,7 @@
 package com.example.leo.gofish;
 
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,7 +16,6 @@ public class Station {
     private String province;
     private double waterLevel;
     private double discharge;
-    private Date dlDate;
 
     public Station() {
         this.id = "";
@@ -90,18 +91,6 @@ public class Station {
 
     public void setWaterLevel(double waterLevel) {
         this.waterLevel = waterLevel;
-    }
-
-    public void setDlDate(Date date) {
-        this.dlDate = date;
-    }
-
-    public Date getDlDate() {
-        return dlDate;
-    }
-
-    public boolean isLatestFile(Date date) {
-        return (dlDate == date) ? true : false;
     }
 
     @Override
