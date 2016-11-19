@@ -95,7 +95,7 @@ public class Station {
     public void setDlDate(Date date) {
         this.dlDate = date;
     }
-    
+
     public Date getDlDate() {
         return dlDate;
     }
