@@ -10,6 +10,9 @@
     <string name="lbltemp">Temperature:</string>
     <string name="lblFeel">Feels like:</string>
     <string name="lblPressure">Pressure:</string>
+    <string name="lblWind">Wind:</string>
+    <string name="lblLocation">Current Location:</string>
+
     <string-array name="wind_directions" >
         <item name="N">N</item>
         <item name="NE">NE</item>

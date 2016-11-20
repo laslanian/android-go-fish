@@ -13,7 +13,7 @@ public class Weather {
     private double temperature;
     private double apparentTemperature;
     private double windSpeed;
-    private String windBearing;
+    private int windBearing;
     private double pressure;
 
     public Weather() {
@@ -24,12 +24,12 @@ public class Weather {
         this.setTemperature(0);
         this.setApparentTemperature(0);
         this.setWindSpeed(0);
-        this.setWindBearing("");
+        this.setWindBearing(0);
         this.setPressure(0);
     }
 
     //detail weather
-    public Weather(double latitude, double longitude,String summary, String icon, double temperature, double apparentTemperature, double windSpeed, String windBearing, double pressure) {
+    public Weather(double latitude, double longitude,String summary, String icon, double temperature, double apparentTemperature, double windSpeed, int windBearing, double pressure) {
         this.setLatitude(latitude);
         this.setLongitude(longitude);
         this.setSummary(summary);
@@ -90,7 +90,6 @@ public class Weather {
     public void setApparentTemperature(double apparentTemperature) {
         this.apparentTemperature = apparentTemperature;
     }
-
     public double getWindSpeed() {
         return windSpeed;
     }
@@ -99,11 +98,11 @@ public class Weather {
         this.windSpeed = windSpeed;
     }
 
-    public String getWindBearing() {
+    public int getWindBearing() {
         return windBearing;
     }
 
-    public void setWindBearing(String windBearing) {
+    public void setWindBearing(int windBearing) {
         this.windBearing = windBearing;
     }
 
@@ -114,4 +113,15 @@ public class Weather {
     public void setPressure(double pressure) {
         this.pressure = pressure;
     }
+
+    public String temperatureToString(){
+        return (Math.round(getApparentTemperature())+"C\u00B0");
+    }
+    public String apparentTempToString(){
+        return (Math.round(getTemperature())+"C\u00B0");
+    }
+    public String pressureToString(){
+        return String.format("%.2f",getPressure()/10)+"kPA";
+    }
+
 }

@@ -100,9 +100,7 @@ public class MainActivity extends AppCompatActivity
         if(view == findViewById(R.id.btnMap)) {
             fr = new CustomMapFragment();
         }
-        else if(view == findViewById(R.id.btnWeather)) {
-            fr = new WeatherFragment();
-        }
+
         else {
             fr = new ListFragment();
         }

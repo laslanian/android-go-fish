@@ -9,5 +9,6 @@
 
     <dimen name="icon_size">50dp</dimen>
     <dimen name="temp_text">30dp</dimen>
+    <dimen name="labelText">15dp</dimen>
     <dimen name="weather_margin">40dp</dimen>
 </resources>

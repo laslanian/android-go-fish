@@ -1,11 +1,14 @@
 package com.example.leo.gofish;
 
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -14,11 +17,18 @@ import android.widget.TextView;
 
 public class WeatherFragment extends Fragment implements ForecastIOResponse {
 
-    TextView summary, icon,lat ,lng,temp,feel,wind,windDir,pressure;
+    private static final String TAG = WeatherFragment.class.getSimpleName();
+    TextView summary,temp,feel,wind,pressure; //lat,lng
+    ImageView icon;
+    private String PACKAGE_NAME="";
+    private String[] windDirections;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PACKAGE_NAME= new MainActivity().getClass().getPackage().getName();
+        Resources res = getResources();
+        windDirections = res.getStringArray(R.array.wind_directions);
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,7 +49,7 @@ public class WeatherFragment extends Fragment implements ForecastIOResponse {
     }
 
     Location createNewLocation(double longitude, double latitude) {
-        Location location = new Location("dummyprovider");
+        Location location = new Location("");
         location.setLongitude(longitude);
         location.setLatitude(latitude);
         return location;
@@ -48,23 +58,35 @@ public class WeatherFragment extends Fragment implements ForecastIOResponse {
     @Override
     public void onTaskComplete(Weather weather) {
         summary = (TextView)getView().findViewById(R.id.summary);
-        icon = (TextView)getView().findViewById(R.id.icon);
-        lat = (TextView)getView().findViewById(R.id.latitude);
-        lng = (TextView)getView().findViewById(R.id.longitude);
+        icon = (ImageView)getView().findViewById(R.id.icon);
+        //lat = (TextView)getView().findViewById(R.id.latitude);
+        //lng = (TextView)getView().findViewById(R.id.longitude);
         temp = (TextView)getView().findViewById(R.id.temperature);
         feel = (TextView)getView().findViewById(R.id.apparentTemperature);
         wind = (TextView)getView().findViewById(R.id.windSpeed);
-        windDir = (TextView)getView().findViewById(R.id.windBearing);
+
         pressure = (TextView)getView().findViewById(R.id.pressure);
 
         summary.setText(weather.getSummary());
-        icon.setText(weather.getIcon());
-        lat.setText(Double.toString(weather.getLatitude()));
-        lng.setText(Double.toString(weather.getLongitude()));
-        temp.setText(Double.toString(weather.getTemperature()));
-        feel.setText(Double.toString(weather.getApparentTemperature()));
-        wind.setText(Double.toString(weather.getWindSpeed()));
-        windDir.setText(weather.getWindBearing());
-        pressure.setText(Double.toString(weather.getPressure()));
+        setIcon(weather.getIcon());
+        //lat.setText(Double.toString(weather.getLatitude()));
+        //lng.setText(Double.toString(weather.getLongitude()));
+        temp.setText(weather.temperatureToString());
+        feel.setText(weather.apparentTempToString());
+        wind.setText(formatWind(weather.getWindSpeed(),weather.getWindBearing()));
+        pressure.setText(weather.pressureToString());
+    }
+
+    private String formatWind(double speed, int direction){
+        return (Math.round(speed)+"km/h "+windBearingToString(direction));
+    }
+    private void setIcon(String image){
+        image=image.replace("-","");
+        Log.i(TAG,image);
+        icon.setImageResource(getResources().getIdentifier(image, "mipmap", PACKAGE_NAME));
+    }
+    private String windBearingToString(int windBearing)
+    {
+        return windDirections[ (int)Math.round((((double)windBearing % 360) / 45)) % 8 ];
     }
 }
