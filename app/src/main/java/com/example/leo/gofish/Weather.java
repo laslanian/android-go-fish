@@ -5,7 +5,7 @@ package com.example.leo.gofish;
  */
 
 public class Weather {
-    private String summary;
+    private String summary ;
     private String icon;
     private double latitude;
     private double longitude;
@@ -17,40 +17,101 @@ public class Weather {
     private double pressure;
 
     public Weather() {
-        this.latitude = 0;
-        this.longitude = 0;
-        this.summary ="";
-        this.icon="";
-        this.temperature=0;
-        this.apparentTemperature=0;
-        this.windSpeed=0;
-        this.windBearing="";
-        this.pressure=0;
-    }
-    //basic weather
-    public Weather(double latitude, double longitude, double temperature, double windSpeed, String windBearing, double pressure) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.temperature=temperature;
-        this.windSpeed=windSpeed;
-        this.windBearing=windBearing;
-        this.pressure=pressure;
+        this.setLatitude(0);
+        this.setLongitude(0);
+        this.setSummary("");
+        this.setIcon("");
+        this.setTemperature(0);
+        this.setApparentTemperature(0);
+        this.setWindSpeed(0);
+        this.setWindBearing("");
+        this.setPressure(0);
     }
 
     //detail weather
     public Weather(double latitude, double longitude,String summary, String icon, double temperature, double apparentTemperature, double windSpeed, String windBearing, double pressure) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.summary =summary;
-        this.icon=icon;
-        this.temperature=temperature;
-        this.apparentTemperature=apparentTemperature;
-        this.windSpeed=windSpeed;
-        this.windBearing=windBearing;
-        this.pressure=pressure;
+        this.setLatitude(latitude);
+        this.setLongitude(longitude);
+        this.setSummary(summary);
+        this.setIcon(icon);
+        this.setTemperature(temperature);
+        this.setApparentTemperature(apparentTemperature);
+        this.setWindSpeed(windSpeed);
+        this.setWindBearing(windBearing);
+        this.setPressure(pressure);
 
     }
 
 
+    public String getSummary() {
+        return summary;
+    }
 
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public double getApparentTemperature() {
+        return apparentTemperature;
+    }
+
+    public void setApparentTemperature(double apparentTemperature) {
+        this.apparentTemperature = apparentTemperature;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public String getWindBearing() {
+        return windBearing;
+    }
+
+    public void setWindBearing(String windBearing) {
+        this.windBearing = windBearing;
+    }
+
+    public double getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(double pressure) {
+        this.pressure = pressure;
+    }
 }

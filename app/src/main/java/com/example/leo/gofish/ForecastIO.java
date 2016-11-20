@@ -14,13 +14,14 @@ import org.json.JSONObject;
 public class ForecastIO extends AsyncTask<Location, Void, Weather> {
 
     private static final String TAG = ForecastIO.class.getSimpleName();
-    private final String key = "0123456789abcdef9876543210fedcba/";
+    private final String key = "e281e3e3f062b04bae195d56fb181e1a/";
     private final String url = "https://api.forecast.io/forecast/";
 
-    public AsyncResponse delegate = null;
+    public ForecastIOResponse delegate = null;
 
     @Override
     protected Weather doInBackground(Location... params) {
+        Weather weather=null;
         Location location = params[0];
         String reqUrl = url + key+location.getLongitude()+","+location.getLatitude();
 
@@ -28,14 +29,14 @@ public class ForecastIO extends AsyncTask<Location, Void, Weather> {
 
         String jsonStr = http.makeServiceCall(reqUrl);
 
-        // Log.e(TAG, "Response from url: " + jsonStr);
+         Log.e(TAG, "Response from url: " + jsonStr);
 
         if (jsonStr != null) {
             try {
                 JSONObject weatherObj = new JSONObject(jsonStr);
                 JSONObject conditions = weatherObj.getJSONObject("currently");
 
-                Weather weather = new Weather(
+                 weather = new Weather(
                         weatherObj.getDouble("latitude"),
                         weatherObj.getDouble("longitude"),
                         conditions.getString("summary"),
@@ -54,7 +55,7 @@ public class ForecastIO extends AsyncTask<Location, Void, Weather> {
             Log.e(TAG, "Couldn't get json.");
         }
 
-        return null;
+        return weather;
     }
 
     @Override
