@@ -12,7 +12,9 @@ import android.widget.TextView;
  * Created by Leo on 2016-11-19.
  */
 
-public class WeatherFragment extends Fragment implements AsyncResponse{
+public class WeatherFragment extends Fragment implements ForecastIOResponse {
+
+    TextView summary, icon,lat ,lng,temp,feel,wind,windDir,pressure;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,6 @@ public class WeatherFragment extends Fragment implements AsyncResponse{
         return view;
     }
 
-
     Location createNewLocation(double longitude, double latitude) {
         Location location = new Location("dummyprovider");
         location.setLongitude(longitude);
@@ -46,14 +47,24 @@ public class WeatherFragment extends Fragment implements AsyncResponse{
 
     @Override
     public void onTaskComplete(Weather weather) {
-        TextView summary = (TextView)getView().findViewById(R.id.summary);
-        TextView icon = (TextView)getView().findViewById(R.id.icon);
-        TextView lat = (TextView)getView().findViewById(R.id.latitude);
-        TextView lng = (TextView)getView().findViewById(R.id.longitude);
-        TextView temp = (TextView)getView().findViewById(R.id.temperature);
-        TextView feel = (TextView)getView().findViewById(R.id.apparentTemperature);
-        TextView wind = (TextView)getView().findViewById(R.id.windSpeed);
-        TextView windDir = (TextView)getView().findViewById(R.id.windBearing);
-        TextView pressure = (TextView)getView().findViewById(R.id.pressure);
+        summary = (TextView)getView().findViewById(R.id.summary);
+        icon = (TextView)getView().findViewById(R.id.icon);
+        lat = (TextView)getView().findViewById(R.id.latitude);
+        lng = (TextView)getView().findViewById(R.id.longitude);
+        temp = (TextView)getView().findViewById(R.id.temperature);
+        feel = (TextView)getView().findViewById(R.id.apparentTemperature);
+        wind = (TextView)getView().findViewById(R.id.windSpeed);
+        windDir = (TextView)getView().findViewById(R.id.windBearing);
+        pressure = (TextView)getView().findViewById(R.id.pressure);
+
+        summary.setText(weather.getSummary());
+        icon.setText(weather.getIcon());
+        lat.setText(Double.toString(weather.getLatitude()));
+        lng.setText(Double.toString(weather.getLongitude()));
+        temp.setText(Double.toString(weather.getTemperature()));
+        feel.setText(Double.toString(weather.getApparentTemperature()));
+        wind.setText(Double.toString(weather.getWindSpeed()));
+        windDir.setText(weather.getWindBearing());
+        pressure.setText(Double.toString(weather.getPressure()));
     }
 }
