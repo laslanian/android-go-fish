@@ -1,5 +1,6 @@
 package com.example.leo.gofish;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -23,6 +24,7 @@ import java.util.GregorianCalendar;
 class DownloadFile extends AsyncTask<Station, Void, Station> {
     private Context mContext;
     private static final String TAG = "Downloader";
+    private ProgressDialog mProgressDialog;
     public AsyncDLResponse delegate = null;
 
     public DownloadFile(Context ctx) {
@@ -31,7 +33,6 @@ class DownloadFile extends AsyncTask<Station, Void, Station> {
 
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
         Log.i(TAG, "Initiate download...");
     }
 
@@ -45,27 +46,19 @@ class DownloadFile extends AsyncTask<Station, Void, Station> {
                 dir.mkdirs();
             }
 
-            Date date = new Date();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-            int hour = cal.get(Calendar.HOUR_OF_DAY);
-
-            String timestamp = year + "" + month + "" + day + "" + hour;
-
-            Log.i(TAG, "Timestamp: " + timestamp);
+            String timeStamp = getTimestamp();
+            Log.i(TAG, "Timestamp: " + timeStamp);
 
             String url = s.getProvince() + "_" +
                     s.getId() + "_hourly_hydrometric.csv"; // url file name
 
-            String fileName =  timestamp + "_" +
+            String fileName =  timeStamp + "_" +
                     s.getProvince() + "_" +
                     s.getId() + "_hourly_hydrometric.csv"; // filename to be saved
             s.setFileName(fileName);
             File file = new File(dir, fileName);
             if(!file.exists() && !file.isFile()) {
+                mProgressDialog = ProgressDialog.show(mContext, "Download", "Downloading station data...", true); // show download progress bar
 
                 URL u = new URL("http://dd.weather.gc.ca/hydrometric/csv/ON/hourly/" + url); // url of website with csv files
                 URLConnection conn = u.openConnection();
@@ -94,7 +87,21 @@ class DownloadFile extends AsyncTask<Station, Void, Station> {
 
     @Override
     protected void onPostExecute(Station s) {
-        Log.i(TAG, "Download successful!");
+        super.onPostExecute(s);
         delegate.onTaskComplete(s);
+        mProgressDialog.dismiss();
+        Log.i(TAG, "Download successful!");
+    }
+
+    public String getTimestamp() {
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+
+        return "" + year + month + day + hour;
     }
 }
