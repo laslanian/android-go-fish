@@ -20,9 +20,10 @@ import java.util.GregorianCalendar;
  * Created by Karlo on 11/15/2016.
  */
 
-class DownloadFile extends AsyncTask<Object, Void, Object> {
+class DownloadFile extends AsyncTask<Station, Void, Station> {
     private Context mContext;
-    private final String DL_TAG = "Downloader";
+    private static final String TAG = "Downloader";
+    public AsyncDLResponse delegate = null;
 
     public DownloadFile(Context ctx) {
         mContext = ctx;
@@ -31,11 +32,11 @@ class DownloadFile extends AsyncTask<Object, Void, Object> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Log.i(DL_TAG, "Initiate download...");
+        Log.i(TAG, "Initiate download...");
     }
 
     @Override
-    protected Station doInBackground(Object... objects) {
+    protected Station doInBackground(Station... objects) {
         Station s = (Station) objects[0];
         try {
             File dir = new File(mContext.getFilesDir() + "/stations/hourly");
@@ -54,7 +55,7 @@ class DownloadFile extends AsyncTask<Object, Void, Object> {
 
             String timestamp = year + "" + month + "" + day + "" + hour;
 
-            Log.i(DL_TAG, "Timestamp: " + timestamp);
+            Log.i(TAG, "Timestamp: " + timestamp);
 
             String url = s.getProvince() + "_" +
                     s.getId() + "_hourly_hydrometric.csv"; // url file name
@@ -83,17 +84,17 @@ class DownloadFile extends AsyncTask<Object, Void, Object> {
             }
         }
         catch (FileNotFoundException e) {
-            Log.i(DL_TAG, "File not found: " + e.toString());
+            Log.i(TAG, "File not found: " + e.toString());
         }
         catch (IOException e) {
-            Log.i(DL_TAG, "File not found: " + e.toString());
+            Log.i(TAG, "File not found: " + e.toString());
         }
         return s;
     }
 
     @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
-        Log.i(DL_TAG, "Download successful!");
+    protected void onPostExecute(Station s) {
+        Log.i(TAG, "Download successful!");
+        delegate.onTaskComplete(s);
     }
 }

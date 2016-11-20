@@ -1,15 +1,16 @@
 package com.example.leo.gofish;
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +37,22 @@ public class ListFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "position is: " + i, Toast.LENGTH_SHORT).show();
                 Station s = stations.get(i);
-                new DownloadFile(getActivity()).execute(stations.get(i));
-                DetailFragment frag = new DetailFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Station", stations.get(i));
-                frag.setArguments(bundle);
+                DownloadFile df = new DownloadFile(getActivity());
+                if(!(df.getStatus() == AsyncTask.Status.RUNNING)) {
+                    df.execute(s);
+                    DetailFragment frag = new DetailFragment();
+                    df.delegate = frag;
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Station", s);
+                    frag.setArguments(bundle);
+
+                    Fragment fr = frag;
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_container, fr);
+                    ft.commit();
+                }
             }
         });
         return root;

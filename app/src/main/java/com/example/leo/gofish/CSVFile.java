@@ -1,5 +1,7 @@
 package com.example.leo.gofish;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,9 +52,17 @@ public class CSVFile {
             while((line = reader.readLine()) != null) {
                 last = line;
             }
-            String [] data = last.split(",");
-            s.setWaterLevel(Double.parseDouble(data[2]));
-            s.setDischarge(Double.parseDouble(data[6]));
+            String [] data = last.split(",", -1);
+            if(data[2].isEmpty()) {
+                s.setWaterLevel(0);
+            } else {
+                s.setWaterLevel(Double.parseDouble(data[2]));
+            }
+            if(data[6].isEmpty()) {
+                s.setDischarge(0);
+            } else {
+                s.setDischarge(Double.parseDouble(data[6]));
+            }
         } catch (IOException e){
             throw new RuntimeException("Error in reading CSV file: "+ e);
         }
