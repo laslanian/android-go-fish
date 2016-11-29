@@ -46,7 +46,7 @@ public class DetailFragment extends Fragment implements AsyncDLResponse {
 
     @Override
     public void onTaskComplete(Station s) {
-        //station.setFileName(s.getFileName());
+        station.setFileName(s.getFileName());
         init();
         mStationId = (TextView) getView().findViewById(R.id.station_id);
         mStationId.setText("Station Id: " + station.getId());
