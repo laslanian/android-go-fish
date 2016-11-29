@@ -14,7 +14,7 @@ public class Station implements Serializable {
     private String province;
     private double waterLevel;
     private double discharge;
-
+    private Weather weather;
     private String fileName;
 
     public Station() {
@@ -25,6 +25,7 @@ public class Station implements Serializable {
         this.province = "";
         this.waterLevel = 0;
         this.discharge = 0;
+        this.weather = new Weather();
     }
 
     public Station(String id, String name, double latitude, double longitude, String province) {
@@ -35,6 +36,7 @@ public class Station implements Serializable {
         this.province = province;
         this.waterLevel = 0;
         this.discharge = 0;
+        this.weather = new Weather();
     }
 
     public String getId() {
@@ -100,6 +102,10 @@ public class Station implements Serializable {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+    public Weather getWeather() { return weather;  }
+
+    public void setWeather(Weather weather) { this.weather = weather; }
 
     @Override
     public String toString() {
