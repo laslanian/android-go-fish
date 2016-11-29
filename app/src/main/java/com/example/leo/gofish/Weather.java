@@ -1,10 +1,12 @@
 package com.example.leo.gofish;
 
+import java.io.Serializable;
+
 /**
  * Created by Leo on 2016-11-19.
  */
 
-public class Weather {
+public class Weather implements Serializable {
     private String summary ;
     private String icon;
     private double latitude;

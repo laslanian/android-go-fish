@@ -37,10 +37,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Station s = stations.get(i);
-
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-               // Bundle bundle = new Bundle();
-               // bundle.putSerializable("Station", s);
                 intent.putExtra("Station",s);
                 startActivity(intent);
 
