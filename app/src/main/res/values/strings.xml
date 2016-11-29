@@ -13,7 +13,7 @@
     <string name="lblWind">Wind:</string>
     <string name="lblLocation">Current Location:</string>
 
-    <string-array name="wind_directions" >
+    <string-array name="wind_directions">
         <item name="N">N</item>
         <item name="NE">NE</item>
         <item name="E">E</item>

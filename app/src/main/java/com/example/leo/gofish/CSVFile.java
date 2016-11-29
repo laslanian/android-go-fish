@@ -14,6 +14,8 @@ import java.util.List;
  */
 
 public class CSVFile {
+
+    private final String TAG = this.getClass().getName();
     InputStream inputStream;
 
     public CSVFile(InputStream inputstream) {
@@ -50,6 +52,7 @@ public class CSVFile {
         try {
             String last = "", line;
             while((line = reader.readLine()) != null) {
+                Log.i(TAG, line);
                 last = line;
             }
             String [] data = last.split(",", -1);
