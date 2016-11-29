@@ -15,7 +15,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Karlo on 11/15/2016.
@@ -58,7 +57,7 @@ class DownloadFile extends AsyncTask<Station, Void, Station> {
             s.setFileName(fileName);
             File file = new File(dir, fileName);
             if(!file.exists() && !file.isFile()) {
-                mProgressDialog = ProgressDialog.show(mContext, "Download", "Downloading station data...", true); // show download progress bar
+               // mProgressDialog = ProgressDialog.show(mContext, "Download", "Downloading station data...", true); // show download progress bar
 
                 URL u = new URL("http://dd.weather.gc.ca/hydrometric/csv/ON/hourly/" + url); // url of website with csv files
                 URLConnection conn = u.openConnection();
@@ -89,7 +88,7 @@ class DownloadFile extends AsyncTask<Station, Void, Station> {
     protected void onPostExecute(Station s) {
         super.onPostExecute(s);
         delegate.onTaskComplete(s);
-        mProgressDialog.dismiss();
+//        mProgressDialog.dismiss();
         Log.i(TAG, "Download successful!");
     }
 
