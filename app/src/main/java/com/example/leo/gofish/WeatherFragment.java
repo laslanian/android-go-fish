@@ -48,23 +48,23 @@ public class WeatherFragment extends Fragment implements ForecastIOResponse {
     @Override
     public void onTaskComplete(Weather weather) {
         summary = (TextView)getView().findViewById(R.id.summary);
-        icon = (TextView)getView().findViewById(R.id.icon);
-        lat = (TextView)getView().findViewById(R.id.latitude);
-        lng = (TextView)getView().findViewById(R.id.longitude);
+        //icon = (TextView)getView().findViewById(R.id.icon);
+        //lat = (TextView)getView().findViewById(R.id.latitude);
+        //lng = (TextView)getView().findViewById(R.id.longitude);
         temp = (TextView)getView().findViewById(R.id.temperature);
         feel = (TextView)getView().findViewById(R.id.apparentTemperature);
         wind = (TextView)getView().findViewById(R.id.windSpeed);
-        windDir = (TextView)getView().findViewById(R.id.windBearing);
+        //windDir = (TextView)getView().findViewById(R.id.windBearing);
         pressure = (TextView)getView().findViewById(R.id.pressure);
 
         summary.setText(weather.getSummary());
-        icon.setText(weather.getIcon());
-        lat.setText(Double.toString(weather.getLatitude()));
-        lng.setText(Double.toString(weather.getLongitude()));
+       // icon.setText(weather.getIcon());
+        //lat.setText(Double.toString(weather.getLatitude()));
+        //lng.setText(Double.toString(weather.getLongitude()));
         temp.setText(Double.toString(weather.getTemperature()));
         feel.setText(Double.toString(weather.getApparentTemperature()));
         wind.setText(Double.toString(weather.getWindSpeed()));
-        windDir.setText(weather.getWindBearing());
+       // windDir.setText(weather.getWindBearing());
         pressure.setText(Double.toString(weather.getPressure()));
     }
 }

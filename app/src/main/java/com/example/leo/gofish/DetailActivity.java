@@ -33,8 +33,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncDLResponse
         if(!(df.getStatus() == AsyncTask.Status.RUNNING)) {
             df.execute(station);
             df.delegate = this;
-
-
         }
     }
 
